@@ -54,7 +54,7 @@ export default function createTextLabel( textCreator, str, width = 0.4, depth = 
   //text.constrainBounds(totalWidth, 0.04);
 
   const labelBackGeometry = new THREE.BoxGeometry( totalWidth, totalHeight, depth, 1, 1, 1 );
-  labelBackGeometry.applyMatrix( new THREE.Matrix4().makeTranslation( totalWidth * 0.5 - margin, 0, 0 ) );
+  labelBackGeometry.applyMatrix4( new THREE.Matrix4().makeTranslation( totalWidth * 0.5 - margin, 0, 0 ) );
 
   const labelBackMesh = new THREE.Mesh( labelBackGeometry, SharedMaterials.PANEL );
   Colors.colorizeGeometry( labelBackMesh.geometry, bgColor );

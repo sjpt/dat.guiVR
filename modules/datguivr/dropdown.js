@@ -258,9 +258,9 @@ export default function createDropdown( {
 
     state.open = modalDropdown.visible; //as of this writing, this is believed to be reliable, but beware dragons, future reader.
     if (group.userData.tipObj) {
-      if (labelInteractions[0].hovering()) {
-        console.log(group.userData.tip);
-      }
+      // if (labelInteractions[0].hovering()) {
+      //   console.log(group.userData.tip);
+      // }
       setVisibility(panel, group.userData.tipObj, labelInteractions[0].hovering());
     }
     if( labelInteractions[0].hovering() || state.open ){

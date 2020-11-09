@@ -463,13 +463,13 @@ export default function createFolder({
   //ala https://threejs.org/docs/#examples/utils/SceneUtils
   function sceneDetach(child, parent, scene) {
     parent.updateMatrixWorld();
-    child.applyMatrix(parent.matrixWorld);
+    child.applyMatrix4(parent.matrixWorld);
     parent.remove(child);
     scene.add(child)
   }
   function sceneAttach(child, scene, parent) {
     parent.updateMatrixWorld();
-    child.applyMatrix( new THREE.Matrix4().getInverse(parent.matrixWorld) );
+    child.applyMatrix4( new THREE.Matrix4().getInverse(parent.matrixWorld) );
 		scene.remove(child);
 		parent.add(child);   
   }
