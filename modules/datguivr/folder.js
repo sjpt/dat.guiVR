@@ -426,7 +426,7 @@ export default function createFolder({
     par.add(group);
     const m = topFolder.matrix.clone();
 
-    group.applyMatrix(m);
+    group.applyMatrix4(m);
     m.setPosition(new THREE.Vector3());
     const t = new THREE.Vector3(Layout.FOLDER_WIDTH, 0, 0).applyMatrix4(m);
     group.position.add(t);

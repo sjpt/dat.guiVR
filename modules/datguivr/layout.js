@@ -27,7 +27,7 @@ export function alignLeft( obj ){
     obj.geometry.translate( width, 0, 0 );
     return obj;
   }
-  else if( obj instanceof THREE.Geometry ){
+  else if( obj instanceof THREE.BufferGeometry ){
     obj.computeBoundingBox();
     const width = obj.boundingBox.max.x - obj.boundingBox.max.y;
     obj.translate( width, 0, 0 );

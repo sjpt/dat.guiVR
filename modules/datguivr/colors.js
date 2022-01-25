@@ -42,9 +42,25 @@ export const TEXTBOX_BG = 0xF0F0F0;
 export const TEXTBOX_HIGHLIGHT_BG = 0xFFFFFF;
 
 export function colorizeGeometry( geometry, color ){
-  geometry.faces.forEach( function(face){
-    face.color.setHex(color);
-  });
-  geometry.colorsNeedUpdate = true;
+  const col = new THREE.Color(color); 
+  let c = geometry.getAttribute('color');
+  let a;
+  if (!c) {
+    a = new Float32Array(geometry.getAttribute('position').array.length).fill(0.5);
+    c = geometry.setAttribute('color', new THREE.BufferAttribute(a, 3));
+  } else {
+    a = c.array;
+  }
+  for (let i = 0; i < a.length; i+=3) {
+    a[i] = col.r;
+    a[i+1] = col.g;
+    a[i+2] = col.b;
+  }
+  c.needsUpdate = true;
+
+  // geometry.faces.forEach( function(face){
+  //   face.color.setHex(color);
+  // });
+  // geometry.colorsNeedUpdate = true;
   return geometry;
 }

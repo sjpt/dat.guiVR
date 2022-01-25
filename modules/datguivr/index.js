@@ -108,9 +108,10 @@ const GUIVR = (function DATGUIVR(){
   */
   const laserMaterial = new THREE.LineBasicMaterial({color:0x55aaff, transparent: true, blending: THREE.AdditiveBlending });
   function createLaser(){
-    const g = new THREE.Geometry();
-    g.vertices.push( new THREE.Vector3() );
-    g.vertices.push( new THREE.Vector3(0,0,0) );
+    const g = new THREE.BufferGeometry();
+    g.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0,0,0,0])));
+    //g.vert ices.push( new THREE.Vector3() );
+    //g.vert ices.push( new THREE.Vector3(0,0,0) );
     return new THREE.Line( g, laserMaterial );
   }
 
@@ -621,10 +622,12 @@ const GUIVR = (function DATGUIVR(){
       
       raycast.set( tPosition, tDirection );
       
-      laser.geometry.vertices[ 0 ].copy( tPosition );
+      // laser.geometry.vert ices[ 0 ].copy( tPosition );
+      const a = laser.geometry.getAttribute('position').array;
+      a[0] = tPosition.x; a[1] = tPosition.y; a[2] = tPosition.z;
       
       //  debug...
-      // laser.geometry.vertices[ 1 ].copy( tPosition ).add( tDirection.multiplyScalar( 1 ) );
+      // laser.geometry.vert ices[ 1 ].copy( tPosition ).add( tDirection.multiplyScalar( 1 ) );
       
       const intersections = raycast.intersectObjects( hitscanObjects, false );
       parseIntersections( intersections, laser, cursor );
@@ -666,11 +669,16 @@ const GUIVR = (function DATGUIVR(){
   }
 
   function updateLaser( laser, point ){
-    laser.geometry.vertices[ 1 ].copy( point );
+    const pp = laser.geometry.getAttribute('position').array;
+    pp[3] = point.x;
+    pp[4] = point.y;
+    pp[5] = point.z;
+    pp.needsUpdate = true;
+    //laser.geometry.vert ices[ 1 ].copy( point );
     laser.visible = true;
     laser.geometry.computeBoundingSphere();
     laser.geometry.computeBoundingBox();
-    laser.geometry.verticesNeedUpdate = true;
+    //laser.geometry.verticesNeedUpdate = true;
   }
 
   function parseIntersections( intersections, laser, cursor ){

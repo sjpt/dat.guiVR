@@ -27,7 +27,7 @@ import * as Font from './font';
 export function createMaterial( color ){
 
   const image = Font.image();
-  const texture = new THREE.Texture(image);
+  const texture = new THREE.Texture(image); texture.name = 'sdfFontTexture'
   texture.needsUpdate = true;
   texture.minFilter = THREE.LinearFilter;
   texture.magFilter = THREE.LinearFilter;

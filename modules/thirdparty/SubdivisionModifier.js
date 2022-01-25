@@ -139,7 +139,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 	/////////////////////////////
 
 	// Performs one iteration of Subdivision
-	THREE.SubdivisionModifier.prototype.smooth = function ( geometry ) {
+	THREE.SubdivisionModifier.prototype.smooth = function ( geometry ) { return; // sjpt TEMP TODO
 
 		var tmp = new THREE.Vector3();
 
