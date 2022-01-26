@@ -55,7 +55,7 @@
     
       var scene = new THREE.Scene();
     
-      var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 10);
+      var camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.1, 1000);
       scene.add(camera);
     
       if (emptyRoom) {
