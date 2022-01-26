@@ -20,8 +20,12 @@ const meshbasic_vert = `
 #include <logdepthbuf_pars_vertex>
 #include <clipping_planes_pars_vertex>
 
+varying float vScale;
+
 void main() {
-    vUv = uv;
+  vScale = pow(abs(determinant(mat3(modelViewMatrix))), 0.33333);
+  // vScale = 10.;
+  vUv = uv;
 	#include <color_vertex>
 
 	#include <begin_vertex>
@@ -39,6 +43,7 @@ const meshbasic_frag = `
 #define USE_UV
 uniform vec3 color;
 uniform float opacity;
+varying float vScale;
 
 #include <common>
 //#include <color_pars_fragment>
@@ -55,6 +60,7 @@ float aastep(float value) {
     #else
         float afwidth = (1.0 / 32.0) * (1.4142135623730951 / (2.0 * gl_FragCoord.w));
     #endif
+    afwidth *= vScale;
     return smoothstep(0.5 - afwidth, 0.5 + afwidth, value);
 }
 ////
