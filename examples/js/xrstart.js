@@ -12,6 +12,10 @@ var WEBVR = {
 		if ( options && options.referenceSpaceType ) {
 			renderer.xr.setReferenceSpaceType( options.referenceSpaceType );
 		} else {
+			// local ok, but user eye at floor level
+			// local-floor, not supported, error setting session
+			// unbounded not supported, error setting session
+			// viewer, can't see anything
 			renderer.xr.setReferenceSpaceType( 'local' );
 		}
 		renderer.xr.enabled = true;
@@ -27,7 +31,9 @@ var WEBVR = {
 			currentSession = session;
 			pending = false;
 			renderVR.reenter = false;
-			renderer.setAnimationLoop(animate);	// sjpt, resart animation after resolution switch
+			// this is done in vrviewer and so does not need repeating
+			// (three.js handles the animation loop inside or outside webXR in the approporiate way)
+			// renderer.setAnimationLoop(animate);
 		}
 		// WEBVR.onSessionStarted = onSessionStarted;
 
@@ -39,7 +45,7 @@ var WEBVR = {
 				console.log('session end, restarting')
 				// WEBVR.enter();					// won't work coming from controller?
 				nircmd(`sendkey f2 press`);
-				renderer.setAnimationLoop(nop);    // don't animate during switch
+				// renderer.setAnimationLoop(nop);    // don't animate during switch
 			}
 		}
 		// WEBVR.onSessionEnded = onSessionEnded;

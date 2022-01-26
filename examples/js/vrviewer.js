@@ -130,13 +130,13 @@
     
       var clock = new THREE.Clock();
       clock.start();
-      renderer.setAnimationLoop(animate);
+      renderer.setAnimationLoop(animate);   // works for no XR or XR, new three.js preferred standard method
     
       function animate() {
         var dt = clock.getDelta();
     
-        // effect.requestAnimationFrame(animate);
-        // renderer.setAnimationLoop(animate);
+        // effect.requestAnimationFrame(animate); // original
+        // renderer.setAnimationLoop(animate);    // works for no XR
     
         controller1.update();
         controller2.update();
@@ -163,7 +163,7 @@
       return {
         scene: scene, camera: camera, controls: controls, renderer: renderer, vrEffect: effect,
         controllers: [controller1, controller2],
-        events: events, animate,
+        events: events,
         toggleVR: toggleVR
       };
     };
