@@ -21,9 +21,11 @@ const meshbasic_vert = `
 #include <clipping_planes_pars_vertex>
 
 varying float vScale;
-
+// This is defined in layout.js (and was observed looking at three heirachy matrices)
+#define TEXT_SCALE 0.00024;
 void main() {
-  vScale = pow(abs(determinant(mat3(modelViewMatrix))), 0.33333);
+  
+  vScale = pow(abs(determinant(mat3(modelViewMatrix))), -0.33333) * TEXT_SCALE;
   // vScale = 10.;
   vUv = uv;
 	#include <color_vertex>
