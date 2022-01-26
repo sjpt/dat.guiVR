@@ -5,6 +5,7 @@
  * At time of writing, this is work in progress, and somewhat more bloated than it needs to be.
  * The shader code is designed to be used with ShaderMaterial rather than RawShaderMaterial.
  */
+ import * as Layout from './layout';
 var assign = require('object-assign');
 
 /**
@@ -22,11 +23,10 @@ const meshbasic_vert = `
 
 varying float vScale;
 // This is defined in layout.js (and was observed looking at three heirachy matrices)
-#define TEXT_SCALE 0.00024;
+#define TEXT_SCALE ${Layout.TEXT_SCALE}
 void main() {
   
   vScale = pow(abs(determinant(mat3(modelViewMatrix))), -0.33333) * TEXT_SCALE;
-  // vScale = 10.;
   vUv = uv;
 	#include <color_vertex>
 
