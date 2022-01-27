@@ -5,6 +5,7 @@
  * At time of writing, this is work in progress, and somewhat more bloated than it needs to be.
  * The shader code is designed to be used with ShaderMaterial rather than RawShaderMaterial.
  */
+// import * as Layout from './layout';
 var assign = require('object-assign');
 
 /**
@@ -20,8 +21,8 @@ const meshbasic_vert = `
 #include <logdepthbuf_pars_vertex>
 #include <clipping_planes_pars_vertex>
 
-void main() {
-    vUv = uv;
+void main() { 
+  vUv = uv;
 	#include <color_vertex>
 
 	#include <begin_vertex>
@@ -50,11 +51,9 @@ uniform float opacity;
 
 /////
 float aastep(float value) {
-    #ifdef GL_OES_standard_derivatives
-        float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
-    #else
-        float afwidth = (1.0 / 32.0) * (1.4142135623730951 / (2.0 * gl_FragCoord.w));
-    #endif
+    // We now assume WebGL2 and so the derivatives are available, 
+    // so afwidth depends on scale of gui
+    float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;
     return smoothstep(0.5 - afwidth, 0.5 + afwidth, value);
 }
 ////
