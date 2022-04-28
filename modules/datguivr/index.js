@@ -200,7 +200,8 @@ const GUIVR = (function DATGUIVR(){
     window.addEventListener( 'mousedown', function( event ){
       if (input.intersections.length > 0) {
         // prevent mouse down from triggering other listeners (polyfill, etc)
-        event.stopImmediatePropagation();
+        // commented out 28 April 2022, generally pretty bad practice
+        // event.stopImmediatePropagation();
       }
       input.pressed = true; //sometimes we care about the mouse being pressed, even on background
        //will be set false at end of first update. Shouldn't be necessary to add a new property... 
