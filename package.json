@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "parse-bmfont-ascii": "^1.0.6",
+    "patch-package": "^6.5.1",
     "three-bmfont-text": "^3.0.1"
   },
   "devDependencies": {

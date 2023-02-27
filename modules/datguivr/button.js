@@ -17,13 +17,9 @@
 * limitations under the License.
 */
 
-import * as SubdivisionModifier from '../thirdparty/SubdivisionModifier';
-
-import createTextLabel from './textlabel';
 import createInteraction from './interaction';
 import * as Colors from './colors';
 import * as Layout from './layout';
-import * as SharedMaterials from './sharedmaterials';
 import * as Grab from './grab';
 
 export default function createButton( {

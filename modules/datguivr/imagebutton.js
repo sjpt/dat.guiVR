@@ -28,13 +28,9 @@
 * limitations under the License.
  */
 
-import * as SubdivisionModifier from '../thirdparty/SubdivisionModifier';
-
-import createTextLabel from './textlabel';
 import createInteraction from './interaction';
 import * as Colors from './colors';
 import * as Layout from './layout';
-import * as SharedMaterials from './sharedmaterials';
 import * as Grab from './grab';
 import {isControllerVisible} from './utils';
 
@@ -85,10 +81,7 @@ export default function createImageButton( {
   group.add( panel );
 
   //  base checkbox
-  const aspectRatio = BUTTON_WIDTH / BUTTON_HEIGHT;
   const rect = new THREE.PlaneGeometry( BUTTON_WIDTH, BUTTON_HEIGHT, 1, 1 );
-  const modifier = new THREE.SubdivisionModifier( 1 );
-  //modifier.modify( rect );
   rect.translate( BUTTON_WIDTH * 0.5, 0, BUTTON_DEPTH );
 
   //  hitscan volume
