@@ -46,8 +46,6 @@ export default function createButton( {
   const divisions = 4;
   const aspectRatio = BUTTON_WIDTH / BUTTON_HEIGHT;
   const rect = new THREE.BoxGeometry( BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_DEPTH, Math.floor( divisions * aspectRatio ), divisions, divisions );
-  const modifier = new THREE.SubdivisionModifier( 1 );
-  modifier.modify( rect );
   rect.translate( BUTTON_WIDTH * 0.5, 0, 0 );
 
   //  hitscan volume
