@@ -653,6 +653,7 @@ const GUIVR = (function DATGUIVR(){
     }
     mouseInput.clicked = false;
     inputObjects.forEach(o=>o.clicked = false);
+    return mouseInput.intersections; //sjpt wanted this
   }
 
   //if any input.interactions have hitVolume that corresponds to something not currently in hitscanObjects,
