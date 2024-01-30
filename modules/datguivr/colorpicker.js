@@ -50,7 +50,7 @@ void main() {
     float d = length(selectedHSV.yz - vUv);
     if (d < 0.015 && d > 0.01) hsv.z = 0.;
     gl_FragColor.rgb = hsv2rgb(hsv);
-    gl_FragColor.w = 1.;
+    gl_FragColor.w = 1.0; // sjpt
 }
 `;
 
@@ -66,7 +66,7 @@ void main() {
     bool indicator = dist < 0.01 && dist > 0.005;
     float v = indicator ? 0. : 1.;
     gl_FragColor.rgb = hsv2rgb(vec3(vUv.x, 1., v));
-    gl_FragColor.w = 1.;
+    gl_FragColor.w = 1.0; // sjpt
 }
 `;
 
