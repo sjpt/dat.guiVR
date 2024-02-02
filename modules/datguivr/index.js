@@ -183,6 +183,8 @@ const GUIVR = (function DATGUIVR(){
     input.mouseCamera = undefined;
 
     window.addEventListener( 'mousemove', function( event ){
+      if (!event.buttons) input.pressed = false;  // reduce interaction between makeDraggable drag and this drag
+
       // if a specific renderer has been defined
       if (mouseRenderer) {
         const clientRect = mouseRenderer.domElement.getBoundingClientRect();
