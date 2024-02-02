@@ -35,7 +35,7 @@ void main() {
 }
 `;
 
-const meshbasic_frag = `
+var /*sjpt was const */ meshbasic_frag = `
 #define USE_MAP
 #define USE_UV
 uniform vec3 color;
@@ -79,6 +79,11 @@ void main() {
 }
 `;
 
+if (+THREE.REVISION > 151 || searchValues.threever === 'three157') { // sjpt patch
+  meshbasic_frag = '\n#define USE_MAP\n#define USE_UV\nuniform vec3 color;\nuniform float opacity;\n\n#include <common>\n//#include <color_pars_fragment>\n#include <uv_pars_fragment>\n#include <map_pars_fragment>\n#include <fog_pars_fragment>\n#include <logdepthbuf_pars_fragment>\n#include <clipping_planes_pars_fragment>\n\n/////\nfloat aastep(float value) {\n    // We now assume WebGL2 and so the derivatives are available, \n    // so afwidth depends on scale of gui\n    float afwidth = length(vec2(dFdx(value), dFdy(value))) * 0.70710678118654757;\n    return smoothstep(0.5 - afwidth, 0.5 + afwidth, value);\n}\n////\n\nvoid main() {\n\n\t#include <clipping_planes_fragment>\n\n    ///\n    vec4 diffuseColor = vec4( color, opacity );\n    \n    vec4 texColor = texture2D(map, vUv);\n    float alpha = aastep(texColor.a);\n    gl_FragColor = vec4(color, opacity * alpha);\n    if (gl_FragColor.a < 0.0001) discard;\n    ///\n\n\t#include <logdepthbuf_fragment>\n    //XXX: big chunk removed from original meshbasic_frag here.\n    #include <tonemapping_fragment>\n\t#include <colorspace_fragment>\n\t#include <fog_fragment>\n}\n';
+  console.warn('colorspace_fragment used');
+  }
+  
 
 module.exports = function createSDFShader (opt) {
   opt = opt || {};

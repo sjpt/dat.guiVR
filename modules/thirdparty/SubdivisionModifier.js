@@ -31,7 +31,7 @@ THREE.SubdivisionModifier.prototype.modify = function ( geometry ) {
 
 	}
 
-	geometry.computeFaceNormals();
+	//sjpt, no longer there ... geometry.computeFaceNormals();
 	geometry.computeVertexNormals();
 
 };

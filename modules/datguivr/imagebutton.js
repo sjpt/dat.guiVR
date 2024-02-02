@@ -88,7 +88,7 @@ export default function createImageButton( {
   const aspectRatio = BUTTON_WIDTH / BUTTON_HEIGHT;
   const rect = new THREE.PlaneGeometry( BUTTON_WIDTH, BUTTON_HEIGHT, 1, 1 );
   const modifier = new THREE.SubdivisionModifier( 1 );
-  //modifier.modify( rect );
+  modifier.modify( rect );  // reallowed sjpt
   rect.translate( BUTTON_WIDTH * 0.5, 0, BUTTON_DEPTH );
 
   //  hitscan volume
