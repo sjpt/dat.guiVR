@@ -9,7 +9,7 @@
     "postinstall": "patch-package"
   },
   "dependencies": {
-    "core-js": "^3.29.0",
+    "core-js": "^3.35.1",
     "parse-bmfont-ascii": "^1.0.6",
     "patch-package": "^6.5.1",
     "three-bmfont-text": "^3.0.1"
