@@ -17,13 +17,9 @@
 * limitations under the License.
 */
 
-import * as SubdivisionModifier from '../thirdparty/SubdivisionModifier';
-
-import createTextLabel from './textlabel';
 import createInteraction from './interaction';
 import * as Colors from './colors';
 import * as Layout from './layout';
-import * as SharedMaterials from './sharedmaterials';
 import * as Grab from './grab';
 
 export default function createButton( {
@@ -50,8 +46,6 @@ export default function createButton( {
   const divisions = 4;
   const aspectRatio = BUTTON_WIDTH / BUTTON_HEIGHT;
   const rect = new THREE.BoxGeometry( BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_DEPTH, Math.floor( divisions * aspectRatio ), divisions, divisions );
-  const modifier = new THREE.SubdivisionModifier( 1 );
-  modifier.modify( rect );
   rect.translate( BUTTON_WIDTH * 0.5, 0, 0 );
 
   //  hitscan volume

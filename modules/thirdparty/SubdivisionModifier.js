@@ -1,3 +1,7 @@
+/**
+ * PJT: this should not be used. Incompatible with recent three.js, and probably not doing anything useful.
+ */
+
 /*
  *	@author zz85 / http://twitter.com/blurspline / http://www.lab4games.net/zz85/blog
  *	@author centerionware / http://www.centerionware.com

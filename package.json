@@ -5,11 +5,13 @@
   "main": "build/datguivr.min.js",
   "author": "Google Data Arts Team",
   "scripts": {
-    "dev": "./node_modules/.bin/grunt",
-    "devwin": ".\\node_modules\\.bin\\grunt"
+    "dev": "grunt",
+    "postinstall": "patch-package"
   },
   "dependencies": {
+    "core-js": "^3.29.0",
     "parse-bmfont-ascii": "^1.0.6",
+    "patch-package": "^6.5.1",
     "three-bmfont-text": "^3.0.1"
   },
   "devDependencies": {

@@ -110,8 +110,6 @@ const GUIVR = (function DATGUIVR(){
   function createLaser(){
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0,0,0,0])));
-    //g.vert ices.push( new THREE.Vector3() );
-    //g.vert ices.push( new THREE.Vector3(0,0,0) );
     return new THREE.Line( g, laserMaterial );
   }
 
@@ -656,7 +654,7 @@ const GUIVR = (function DATGUIVR(){
     }
     mouseInput.clicked = false;
     inputObjects.forEach(o=>o.clicked = false);
-    return mouseInput.intersections;
+    return mouseInput.intersections; //sjpt wanted this
   }
 
   //if any input.interactions have hitVolume that corresponds to something not currently in hitscanObjects,
