@@ -112,7 +112,10 @@ export function creator(){
     }
 
     group.updateLabel = function( str ){
-      mesh.geometry.update( str );
+      if (mesh.userData.labelString !== str) {
+        mesh.geometry.update( str );
+        mesh.userData.labelString = str;
+      }
     };
 
     return group;

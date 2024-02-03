@@ -110,8 +110,6 @@ const GUIVR = (function DATGUIVR(){
   function createLaser(){
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(new Float32Array([0,0,0,0,0,0])));
-    //g.vert ices.push( new THREE.Vector3() );
-    //g.vert ices.push( new THREE.Vector3(0,0,0) );
     return new THREE.Line( g, laserMaterial );
   }
 
@@ -183,6 +181,8 @@ const GUIVR = (function DATGUIVR(){
     input.mouseCamera = undefined;
 
     window.addEventListener( 'mousemove', function( event ){
+      if (!event.buttons) input.pressed = false;  // reduce interaction between makeDraggable drag and this drag
+
       // if a specific renderer has been defined
       if (mouseRenderer) {
         const clientRect = mouseRenderer.domElement.getBoundingClientRect();
@@ -200,7 +200,8 @@ const GUIVR = (function DATGUIVR(){
     window.addEventListener( 'mousedown', function( event ){
       if (input.intersections.length > 0) {
         // prevent mouse down from triggering other listeners (polyfill, etc)
-        event.stopImmediatePropagation();
+        // commented out 28 April 2022, generally pretty bad practice
+        // event.stopImmediatePropagation();
       }
       input.pressed = true; //sometimes we care about the mouse being pressed, even on background
        //will be set false at end of first update. Shouldn't be necessary to add a new property... 

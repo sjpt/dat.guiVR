@@ -1,13 +1,13 @@
 /**
  * This should look like an imagebutton with a solid color MeshBasicMaterial
  * When pressed it could bring up some kind of picker depending on configuration.
- * 
+ *
  * For now, just going with RGB sliders as I shouldn't spend too long on this ATM,
- * but very tempted by prospect of an HS square with V slider... 
+ * but very tempted by prospect of an HS square with V slider...
  * or H slider and SV square which seems to be what dat.gui uses.
  * Or something fancier like a hue circle around an SV triangle etc etc.
- * 
- * 
+ *
+ *
  * Peter Todd 2017
  */
 
@@ -50,6 +50,7 @@ void main() {
     float d = length(selectedHSV.yz - vUv);
     if (d < 0.015 && d > 0.01) hsv.z = 0.;
     gl_FragColor.rgb = hsv2rgb(hsv);
+    gl_FragColor.w = 1.0; // sjpt
 }
 `;
 
@@ -65,7 +66,7 @@ void main() {
     bool indicator = dist < 0.01 && dist > 0.005;
     float v = indicator ? 0. : 1.;
     gl_FragColor.rgb = hsv2rgb(vec3(vUv.x, 1., v));
-    
+    gl_FragColor.w = 1.0; // sjpt
 }
 `;
 
@@ -73,7 +74,7 @@ void main() {
 //why not use THREE.Color methods?
 /* accepts parameters
  * h  Object = {h:x, s:y, v:z}
- * OR 
+ * OR
  * h, s, v
 */
 function HSVtoRGB(h, s, v) {
@@ -104,7 +105,7 @@ function HSVtoRGB(h, s, v) {
 }
 /* accepts parameters
  * r  Object = {r, g, b}
- * OR 
+ * OR
  * r, g, b
 */
 function RGBtoHSV(r, g, b) {
@@ -127,7 +128,7 @@ function RGBtoHSV(r, g, b) {
     return {
         h: h,
         s: s,
-        v: v, 
+        v: v,
         x: h, y: s, z: v //so that we can do Vector3.copy(this)
     };
 }
@@ -158,7 +159,7 @@ export default function createColorPicker( {
         textCreator, func, image, propertyName, width, height, depth, changeColorOnHover
     });
     group.guiType = "ColorPicker";
-    
+
     var panel;
 
     function changeFn() {
@@ -181,9 +182,9 @@ export default function createColorPicker( {
             return;
         } else {
             // would be handy to have a way to make narrower panel
-            panel = dat.GUIVR.create("Color Chooser"); 
+            panel = dat.GUIVR.create("Color Chooser");
             panel.hideHeader();
-            
+
             if (fancyPanel) {
                 const SVMaterial = new THREE.ShaderMaterial({
                     uniforms: uniforms,
@@ -193,7 +194,7 @@ export default function createColorPicker( {
                 const setSV = (p) => {
                     uniforms.selectedHSV.value.y = p.localPoint.x;
                     uniforms.selectedHSV.value.z = p.localPoint.y;
-                    
+
                     const c = HSVtoRGB(uniforms.selectedHSV.value);
                     color.setRGB(c.r, c.g, c.b);
                     changeFn();
