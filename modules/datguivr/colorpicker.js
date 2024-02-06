@@ -162,8 +162,16 @@ export default function createColorPicker( {
 
     var panel;
 
+    // change colour in place, course gamma compensation
+    function colpow(c, p=0.4545) {
+        c.r = Math.pow(c.r, p);  // uglify doesn't understand **
+        c.g = Math.pow(c.g, p);  // uglify doesn't understand **
+        c.b = Math.pow(c.b, p);  // uglify doesn't understand **
+    }
+
     function changeFn() {
         image.color.set(color);
+        colpow(image.color);
         events.emit('onChange', color);
     }
 
@@ -244,6 +252,7 @@ export default function createColorPicker( {
         //even if ref hasn't changed, value still might've, and we're not currently reflecting that.
         color = object[propertyName];
         image.color.copy(color);
+        colpow(image.color);
         uniforms.selectedHSV.value.copy(RGBtoHSV(color));
     }
     group.listen = () => {
