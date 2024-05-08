@@ -44,13 +44,18 @@ function orthographicFolderLayout() {
   //camBoxSetup(cam);
   const tfs = topFolderStack.filter(x => x.visible);
   const near = cam.near, far = cam.far, n = tfs.length;
-  const zs = tfs.map(f => f.position.z).sort((a,b)=>a-b);
-  zs[-1] = -9999; // I suppose this is to deal with accessing zs[i-1] below ¯\_(ツ)_/¯
-  zs.forEach( (z,i) => zs[i] = Math.max(zs[i], zs[i-1] + 10*Layout.PANEL_DEPTH)); // in case of equals
+  // Attempt to keep some old z values threw others out,
+  // especially if many folders undocked in which case we hit the "GUIVR Warning" below
+  // and sometimes the menus froze.
+  // So we use the simpler z - i/n below.
+  //const zs = tfs.map(f => f.position.z).sort((a,b)=>a-b);
+  //zs[-1] = -9999; // I suppose this is to deal with accessing zs[i-1] below ¯\_(ツ)_/¯
+  //zs.forEach( (z,i) => zs[i] = Math.max(zs[i], zs[i-1] + 10*Layout.PANEL_DEPTH)); // in case of equals
   
   tfs.forEach((f, i) => {
     //let z = -0.9*far + i*10*Layout.PANEL_DEPTH;
-    const z = zs[i];
+    //const z = zs[i];
+    const z = i/n;
     if (z !== f.position.z) {
       f.position.z = z;
       f.updateMatrix();
@@ -82,7 +87,7 @@ export default function createFolder({
   globalControllers
 } = {} ){
 
-  const MAX_FOLDER_ITEMS_IN_COLUMN = 25;
+  const MAX_FOLDER_ITEMS_IN_COLUMN = 40;
 
   const width = Layout.FOLDER_WIDTH;
   const depth = Layout.PANEL_DEPTH;
