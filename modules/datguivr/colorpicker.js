@@ -2,10 +2,14 @@
  * This should look like an imagebutton with a solid color MeshBasicMaterial
  * When pressed it could bring up some kind of picker depending on configuration.
  *
+ *
  * For now, just going with RGB sliders as I shouldn't spend too long on this ATM,
+ * but very tempted by prospect of an HS square with V slider...
  * but very tempted by prospect of an HS square with V slider...
  * or H slider and SV square which seems to be what dat.gui uses.
  * Or something fancier like a hue circle around an SV triangle etc etc.
+ *
+ *
  *
  *
  * Peter Todd 2017
